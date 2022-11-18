@@ -17,6 +17,8 @@ def train_test_splitter(fp, ratio=0.7, seed=42, save_to=True):
     df = _load_data(fp)
     if len(df) == 0:
         raise ValueError('Cannot split an empty dataframe')
+    if ratio <= 0 or ratio >= 1:
+        raise ValueError('Split ratio must be within range (0, 1)')
     n_rows = len(df)
     np.random.seed(seed)
     mask = np.random.rand(n_rows) < ratio
